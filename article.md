@@ -600,3 +600,706 @@ To tell Python that you mean this to be a length-one tuple, add a comma after th
 >>> one_tuple
 (1,)
 ```
+
+## Strings
+Make a string like this:
+
+```
+>>> my_string = 'interesting text'
+>>> my_string
+'interesting text'
+```
+
+You can use single quotes or double quotes for your string, the two strings are the same:
+
+```
+>>> another_string = "interesting text"
+>>> another_string
+'interesting text'
+>>> my_string == another_string
+True
+```
+
+Convert other objects to strings using str:
+
+```
+>>> # Convert integer to string
+>>> str(9)
+'9'
+>>> # Convert floating point value to string
+>>> str(1.2)
+'1.2'
+```
+
+### Strings are sequences
+Like lists, strings are sequences (have length, can be iterated, can index, can slice).
+
+```
+>>> # Length
+>>> len(my_string)
+16
+```
+
+```
+>>> # Iterable
+>>> for c in my_string:
+...     print(c)
+i
+n
+t
+e
+r
+e
+s
+t
+i
+n
+g
+<BLANKLINE>
+t
+e
+x
+t
+```
+
+```
+>>> # Can index
+>>> my_string[1]
+'n'
+```
+
+```
+>>> # Can slice
+>>> my_string[1:5]
+'nter'
+```
+
+### Strings are immutable
+Unlike lists, strings are immutable. You cannot change the characters within a string:
+
+```
+>>> my_string[1] = 'N'
+Traceback (most recent call last):
+   ...
+TypeError: 'str' object does not support item assignment
+```
+
+### Adding strings
+```
+>>> my_string + ' with added insight'
+'interesting text with added insight'
+```
+
+### String methods
+Strings have lots of interesting methods. In IPython, try tab-complete on a string variable name, followed by a period — e.g. type my_string., followed by the tab key. See also the list of string methods in the Python docs.
+
+One interesting method is replace. It returns a new string that is a copy of the input, but replacing instances of one string with another:
+
+```
+>>> another_string = my_string.replace('interesting', 'extraordinary')
+>>> another_string
+'extraordinary text'
+```
+
+Notice that the original string has not changed (it’s immutable):
+
+```
+>>> my_string
+'interesting text'
+```
+
+Use the split method to break a string into a list of strings. By default, split will split the string at any white space (spaces, tab characters or line breaks):
+
+```
+>>> my_string.split()
+['interesting', 'text']
+```
+
+Pass a character to split to split the string at that character:
+
+```
+>>> another_example = 'one:two:three'
+>>> another_example.split(":")
+['one', 'two', 'three']
+```
+
+The strip method returns a new string with spaces, tabs and end of line characters removed from the beginning and end of the string:
+
+```
+>>> # A string with a newline character at the end
+>>> my_string = ' a string\n'
+>>> my_string
+' a string\n'
+>>> my_string.strip()
+'a string'
+```
+
+### Inserting values into strings
+See: Inserting values into strings.
+
+## Range
+range in Python 3 returns a range object. It is a sequence, and so it is rather like a list [4]. When you use range with one argument, the argument value is the stop index. For example, to make a range object generating the numbers from 0 up to but not including 5:
+
+```
+>>> my_range = range(5)
+>>> my_range
+range(0, 5)
+```
+
+You can make a range object into a list by using list:
+
+```
+>>> list(range(5))
+[0, 1, 2, 3, 4]
+```
+A range object is a sequence:
+
+```
+>>> # Has a length
+>>> len(my_range)
+5
+```
+
+```
+>>> # Is iterable
+>>> for e in my_range:
+...    print(e)
+0
+1
+2
+3
+4
+```
+
+```
+>>> # Can be indexed
+>>> my_range[1]
+1
+```
+
+```
+>>> # Can be sliced
+>>> my_range[0:2]
+range(0, 2)
+```
+
+Set the start element for range by passing two arguments:
+
+```
+>>> my_range = range(1, 7)
+>>> my_range
+range(1, 7)
+>>> list(my_range)
+[1, 2, 3, 4, 5, 6]
+```
+
+Set the step size with a third argument:
+
+```
+>>> my_range = range(1, 7, 2)
+>>> my_range
+range(1, 7, 2)
+>>> list(my_range)
+[1, 3, 5]
+```
+
+One common use of range is to iterate over a sequence of numbers in a for loop:
+
+```
+>>> for i in range(5):
+...    print(i)
+...
+0
+1
+2
+3
+4
+```
+
+## Sets
+Sets are collections of unique elements, with no defined order. Python reserves the right to order set elements in any way it chooses:
+
+```
+>>> # Only unique elements collected in the set
+>>> my_set = set((5, 3, 1, 3))
+>>> my_set  # doctest: +SKIP
+{1, 5, 3}
+```
+
+Because there is no defined order, you cannot index into a set:
+
+```
+>>> my_set[1]
+Traceback (most recent call last):
+   ...
+TypeError: 'set' object does not support indexing
+```
+
+You can add elements to a set with the add method:
+
+```
+>>> my_set.add(10)
+>>> my_set  # doctest: +SKIP
+{1, 3, 5, 10}
+```
+
+Because set elements must be unique, if you add an element already in the set, this does not change the set:
+
+```
+>>> my_set.add(5)
+>>> my_set  # doctest: +SKIP
+{1, 3, 5, 10}
+```
+
+You can iterate over a set, but the order of elements is arbitrary. You cannot rely on the same order in any two runs of your program:
+
+```
+>>> # The order of elements is arbitrary
+>>> for element in my_set:  # doctest: +SKIP
+...     print(element)
+1
+3
+5
+```
+
+Look at the methods of the set object for interesting operations such as difference, union, intersection etc.
+
+## Sets, lists and tuples are containers
+A container is a Python object for which you can test an element for membership. So, if an object c is a container then we can test if an element is in the container with true_or_false = element in c.
+
+Be careful — the word in has different meanings in for element in c: and true_or_false = element in c. With for element in c:, in is a part of the for loop syntax. With true_or_false = element in c, in triggers a test of membership, returning True or False.
+
+```
+>>> 5 in my_set
+True
+>>> 11 in my_set
+False
+```
+
+You can use not in to test if an element is not in a container:
+
+```
+>>> 11 not in my_set
+True
+```
+
+Lists and tuples are also containers:
+
+```
+>>> 9 in [9, 4, 7, 0, 8]
+True
+>>> 3 in (1, 3, 5)
+True
+```
+
+## Dictionaries
+A dictionary is an unordered collection of key / value pairs. The key is something that identifies the element, and the value is the value corresponding to the particular key.
+
+```
+>>> # This is an empty dictionary
+>>> software = {}
+```
+
+Here we insert a new key / value mapping into the dictionary. The key is a string — 'MATLAB' — and the corresponding value is an integer 50:
+
+```
+>>> software['MATLAB'] = 50
+>>> software
+{'MATLAB': 50}
+```
+
+Now we insert another key / value mapping:
+
+```
+>>> software['Python'] = 100
+>>> software  #doctest: +SKIP
+{'Python': 100, 'MATLAB': 50}
+```
+
+Get the value corresponding to a key by indexing the dictionary with the key:
+
+```
+>>> software['Python']
+100
+```
+
+We can iterate over the keys in the dictionary, but the order of the keys is arbitrary. Python returns the keys in any order it chooses, and we can’t rely on the order being the same in any two runs of our program:
+
+```
+>>> for key in software.keys():  #doctest: +SKIP
+...     print(key)
+MATLAB
+Python
+```
+
+We can also iterate over the values, with the same constraint, that the order is arbitrary:
+
+```
+>>> for value in software.values():  #doctest: +SKIP
+...     print(value)
+...
+50
+100
+```
+
+We can use the items method to iterate over the key / value pairs. In this case each element is a tuple of length two, where the first element is the key and the second element is the value:
+
+```
+>>> for key_value in software.items():
+...     print(key_value)
+('MATLAB', 50)
+('Python', 100)
+```
+
+One way to construct a dictionary is with curly brackets, using colons to separate the key and value, and commas to separate the pairs:
+
+```
+>>> software = {'MATLAB': 50, 'Python': 100}
+>>> software
+{'Python': 100, 'MATLAB': 50}
+```
+
+Keys must be unique. A later key / value pair will overwrite an earlier key / value pair that had the same key:
+
+```
+>>> software = {'MATLAB': 50, 'Python': 100, 'MATLAB': 45}
+>>> software  # doctest: +SKIP
+{'Python': 100, 'MATLAB': 45}
+```
+
+### Dictionaries are containers
+Dictionaries are also containers. Python takes the elements in the container to be the dictionary keys. This is a convenient way to test if you already have a key in a dictionary:
+
+```
+>>> 'MATLAB' in software
+True
+>>> 'happiness' in software
+False
+```
+
+## “for”, “while”, “continue” and “break”
+for statements and while statement are loops, because Python keeps executing the for or while block until the for runs out of elements or the while condition is False. You can break out of a loop using the break statement:
+
+```
+>>> for i in range(10):
+...     if i == 6:
+...         break
+...     print(i)
+...
+0
+1
+2
+3
+4
+5
+```
+
+The continue statement short-circuits execution of the current iteration of the for or while block, to continue with the next iteration:
+
+```
+>>> for i in range(10):
+...     if i == 6:
+...         continue
+...     print(i)
+0
+1
+2
+3
+4
+5
+7
+8
+9
+```
+
+See “for” and “while”, “break” and “else:” for more on loops and break.
+
+## Functions
+Here we define our first function in Python:
+
+```
+>>> def my_function(an_argument):
+...     return an_argument + 1
+```
+
+The function definition begins with the def keyword followed by a space. There follows the name of the function my_function. Next we have an open parenthesis, followed by a specification of the arguments that the function expects to be passed to it. In this case, the function expects a single argument. For this function, the value of the input argument will be attached to the name an_argument when the function starts to execute. Last, we have an indented block, with code that will run when the function is called. We can return a value from the function using the return statement.
+
+```
+>>> my_function(10)
+11
+```
+
+We called my_function by appending the opening parenthesis, and the arguments, followed by the closing parenthesis. The function began to execute with the variable an_argument set to 10. It returned 10 + 1 = 11.
+
+A function need not accept any arguments:
+
+```
+>>> def my_second_function():
+...     return 42
+...
+>>> my_second_function()
+42
+```
+
+A function does not need to have a return statement. If there is no return statement, the function returns None:
+
+```
+>>> def function_with_no_return():
+...     # Function with no return statement
+...     a = 1
+...
+>>> function_with_no_return() == None
+True
+```
+
+A function can have more than one argument:
+
+```
+>>> def my_third_function(first_argument, second_argument):
+...     return first_argument + second_argument
+...
+>>> my_third_function(10, 42)
+52
+```
+
+### Default values for function arguments
+The function definition can give a default value for a function argument:
+
+```
+>>> def my_fourth_function(first_argument, extra_argument=101):
+...     return first_argument + extra_argument
+```
+
+This function, like my_third_function, has two arguments, and we can call it the same way that we call my_third_function:
+
+```
+>>> my_fourth_function(10, 42)
+52
+```
+
+But, we can also omit the second argument, because it has a default value. In that case the argument will get its default value:
+
+```
+>>> my_fourth_function(10)  # Pass one argument, get default for second
+111
+```
+
+So far we have passed in arguments by position, the first argument in our call becoming the first argument in the function, and so on. We can also pass in arguments by name. For example, we could pass in extra_argument by giving the parameter name and value, like this:
+
+```
+>>> my_fourth_function(10, extra_argument=202)
+212
+```
+
+Passing arguments this way can make the code easier to read, because the name of the argument often gives a good clue as to its purpose in the function. It can also be useful with functions having many parameters with default values; in that case using the argument name makes it easier to pass in one or few values that are different from the defaults.
+
+### Functions are objects too
+Remember that everything in Python is an object. The function is itself an object, where the name of the function is a variable, that refers to the function:
+
+```
+>>> my_fourth_function
+<function my_fourth_function at 0x...>
+>>> type(my_fourth_function)
+<class 'function'>
+```
+
+We call the function by adding the open parenthesis followed by the arguments and the close parenthesis:
+
+```
+>>> my_fourth_function(10)
+111
+```
+
+We can make a new name to point to this same function as easily as we can could with any other Python variable:
+
+```
+>>> another_reference_to_func4 = my_fourth_function
+>>> type(another_reference_to_func4)
+<class 'function'>
+>>> # We call this function using the new name
+>>> another_reference_to_func4(10)
+111
+```
+
+## Sorting
+
+The Python function sorted returns a sorted list from something that Python can iterate over:
+
+```
+>>> sorted('adcea')
+['a', 'a', 'c', 'd', 'e']
+>>> sorted((1, 5, 3, 2))
+[1, 2, 3, 5]
+```
+
+In order to do the sorting, Python compares the elements with one_element < another_element. For example, to do the sort above, Python needed results like:
+
+```
+>>> 3 < 5
+True
+```
+
+Sometimes you want to order the objects in some other way than simply comparing the elements. If so, then you can define a sort function. A sort function is a function that accepts an element as its argument, and returns a sort value for that element. Python does the sorting, not on the elements themselves, but on the returned sort value for each element.
+
+For example, let’s say we have first and last names stored as tuples:
+
+```
+>>> people = [('JB', 'Poline'), ('Matthew', 'Brett'), ('Mark', 'DEsposito')]
+```
+
+By default, Python compares tuples by comparing the first value first, then the second value, and so on. This means for our case that we are sorting on the first name:
+
+```
+>>> ('Matthew', 'Brett') > ('Mark', 'DEsposito')
+True
+>>> sorted(people)
+[('JB', 'Poline'), ('Mark', 'DEsposito'), ('Matthew', 'Brett')]
+```
+
+That may not be what you want. You might want to sort by the last name, which is the second value in the tuple. In that case you can make a sort function, that accepts the element as an input (the tuple in this case), and returns a value:
+
+```
+>>> def get_last_name(person):
+...     return person[1]  # The last name
+```
+
+Remember everything in Python is an object. The function we have just defined is also an object, with name get_last_name:
+
+```
+>>> get_last_name
+<function get_last_name at 0x...>
+```
+
+We can pass this value to the sorted function as a sort function. We will pass this in using the sort function parameter name, which is key:
+
+```
+>>> sorted(people, key=get_last_name)
+[('Matthew', 'Brett'), ('Mark', 'DEsposito'), ('JB', 'Poline')]
+```
+
+## Files
+You can open a file in several different modes. The mode specifies whether you want to read or write the file, and whether the data in the file is, or will be, text data (string) or binary data (bytes). For example, here we open a file for Writing Text (wt):
+
+```
+>>> my_file = open("a_text_file.txt", "wt")
+```
+
+If we had wanted to write binary (byte) data, we would have used wb for the mode (Write Binary).
+
+As usual, you can explore this new file object in IPython by appending the object name with a period, and pressing the tab key to get a list of attributes and methods — e.g. myfile. followed by tab.
+
+To write to a file, use the write method.
+
+```
+>>> # Write a line of text with a newline character at the end
+>>> # The method returns the number of characters written
+>>> my_file.write("MATLAB is good for matrices\n")
+28
+>>> # Another line
+>>> my_file.write("Python is good for coding\n")
+26
+```
+
+You should close the file when you’ve finished with it:
+
+```
+>>> my_file.close()
+```
+
+To read a file, open the file in read mode:
+
+```
+>>> # Open file in Read Text mode
+>>> my_file2 = open("a_text_file.txt", "rt")
+```
+
+You can read all the contents in one shot by calling the read method without arguments:
+
+```
+>>> contents = my_file2.read()
+>>> print(contents)
+MATLAB is good for matrices
+Python is good for coding
+<BLANKLINE>
+```
+
+Remember to close the file afterwards:
+
+```
+>>> my_file2.close()
+```
+
+An open text file object is also iterable, meaning, that you can ask the file object to return its contents line by line, in a for loop. Let’s open the file again to show this in action:
+
+```
+>>> my_file2 = open("a_text_file.txt", "rt")
+>>> for line in my_file2:  # iterating over the file object
+...     print("Line is:", line)
+...
+Line is: MATLAB is good for matrices
+<BLANKLINE>
+Line is: Python is good for coding
+<BLANKLINE>
+>>> my_file2.close()
+```
+
+#### Footnotes
+[1]	Python 3 returns a floating point value from dividing two integers, but the default for Python 2 is to return the integer part of the division. Thus, in Python 2 1 / 2 returns the same result as 1 // 2 i.e. 0. If your code may run on Python 2, remember to add the statement from __future__ import division at the top of your code files, to make sure you get the Python 3 behavior when dividing integers.
+[2]	
+Here is an if statement in Python:
+
+# Python
+my_var = 10
+if my_var == 10:
+    print("The conditional is True!")
+    print("my_var does equal 10")
+The equivalent in R is:
+
+# R
+my_var = 10
+if (my_var == 10) {
+    print("The conditional is True!")
+    print("my_var does equal 10")
+}
+For MATLAB:
+
+% MATLAB
+my_var = 10;
+if my_var == 10
+    disp('The conditional is True!');
+    disp('my_var does equal 10');
+end
+For Python, the indentation defines the block. For R and MATLAB, indentation is an optional way of formatting the code to make it look nicer. In R and MATLAB, the same code without indentation will run just as well, but most people find the code harder to read:
+
+# R
+my_var = 10
+if (my_var == 10) {
+# Indentation is optional
+print("The conditional is True!")
+print("my_var does equal 10")
+}
+% MATLAB
+my_var = 10;
+if my_var == 10
+% Indentation is optional
+disp('The conditional is True!');
+disp('my_var does equal 10');
+end
+[3]	
+Here is a for loop in Python:
+
+# Python
+for element in [9, 4, 7, 0, 8]:
+    print(element)
+The equivalents in R and MATLAB are:
+
+# R
+for (element in list(9, 4, 7, 0, 8)) {
+    print(element)
+}
+% MATLAB
+for element = {9, 4, 7, 0, 8}
+    disp(e);
+end
+[4]	In Python 2, range returns a list. You can often use a Python 3 range object in the same way you could use a list, so this difference between Python 2 and 3 may not matter for the person using the code. There are things that you can do with lists that you cannot do with ranges, such as adding. For example range(4) + range(5) will work in Python 2 (adding lists), but fail in Python 3 (you cannot add range objects).
+
