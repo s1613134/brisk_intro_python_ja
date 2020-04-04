@@ -1244,33 +1244,44 @@ Line is: Python is good for coding
 ```
 
 #### Footnotes
+
 [1]	Python 3 returns a floating point value from dividing two integers, but the default for Python 2 is to return the integer part of the division. Thus, in Python 2 1 / 2 returns the same result as 1 // 2 i.e. 0. If your code may run on Python 2, remember to add the statement from __future__ import division at the top of your code files, to make sure you get the Python 3 behavior when dividing integers.
 [2]	
 Here is an if statement in Python:
 
+```
 # Python
 my_var = 10
 if my_var == 10:
     print("The conditional is True!")
     print("my_var does equal 10")
+```
+
 The equivalent in R is:
 
+```
 # R
 my_var = 10
 if (my_var == 10) {
     print("The conditional is True!")
     print("my_var does equal 10")
 }
+```
+
 For MATLAB:
 
+```
 % MATLAB
 my_var = 10;
 if my_var == 10
     disp('The conditional is True!');
     disp('my_var does equal 10');
 end
+```
+
 For Python, the indentation defines the block. For R and MATLAB, indentation is an optional way of formatting the code to make it look nicer. In R and MATLAB, the same code without indentation will run just as well, but most people find the code harder to read:
 
+```
 # R
 my_var = 10
 if (my_var == 10) {
@@ -1278,6 +1289,9 @@ if (my_var == 10) {
 print("The conditional is True!")
 print("my_var does equal 10")
 }
+```
+
+```
 % MATLAB
 my_var = 10;
 if my_var == 10
@@ -1285,21 +1299,32 @@ if my_var == 10
 disp('The conditional is True!');
 disp('my_var does equal 10');
 end
+```
+
 [3]	
 Here is a for loop in Python:
 
+```
 # Python
 for element in [9, 4, 7, 0, 8]:
     print(element)
+```
+    
 The equivalents in R and MATLAB are:
 
+```
 # R
 for (element in list(9, 4, 7, 0, 8)) {
     print(element)
 }
+```
+
+```
 % MATLAB
 for element = {9, 4, 7, 0, 8}
     disp(e);
 end
+```
+
 [4]	In Python 2, range returns a list. You can often use a Python 3 range object in the same way you could use a list, so this difference between Python 2 and 3 may not matter for the person using the code. There are things that you can do with lists that you cannot do with ranges, such as adding. For example range(4) + range(5) will work in Python 2 (adding lists), but fail in Python 3 (you cannot add range objects).
 
