@@ -7,14 +7,23 @@ This is an introduction designed for those of us who already know a dynamic prog
 
 
 ## How to read this page
+## このページの使い方
 Read this page in one shot from beginning to end. We go through all the basic Python data types, stopping from time to time to talk about relevant features of the Python language.
+このページを最初から最後まで通して読んでください。
+Pythonのすべての基本的なデータ型を扱うとともに、関連するPythonの言語の特徴を説明します。
 
 While you are reading, I suggest you open an IPython console, and type or copy / paste the code fragments, to run them. To copy / paste, click the >>> symbol at the right of each code cell to remove the leading characters and output, before selecting the cell contents.
+読みながら IPython コンソールを開き、コードを打ち込むかコピペして実行すると良いでしょう。
+コピペするために、セルの中身を選択する前に各コードのセルの右の >>> マークをクリックして先頭の文字と結果を取り除いてください。
 
 By the end of the page you should have an idea of the Python landscape to orient you, as you start to learn the language.
+このページが終わりるまでには、Pythonの概要が理解でき、この言語を学ぶときの導きになるでしょう。
 
 ## Numbers
+## 数字
 There are two types of numbers in Python: integer and floating point. In Python, an integer is an object of type int, and a float is an object of type float.
+Pythonには２種類の数字があります。それは整数と浮動小数点です。
+Pythonにおいて、整数はint型オブジェクトで、浮動小数点はfloat型オブジェクトです。
 
 ```
 >>> a = 99
@@ -26,6 +35,7 @@ There are two types of numbers in Python: integer and floating point. In Python,
 ```
 
 You can create ints and floats by using int and float like this:
+int型とfloat型は、int命令とfloat命令を使って次のように作ります：
 
 ```
 >>> float('1')
@@ -39,6 +49,7 @@ You can create ints and floats by using int and float like this:
 ```
 
 +, -, * or / on a mix of floats and ints, give floats:
+int型とfloat型の間の +, -, * や / の結果はfloat型になります。
 
 ```
 >>> a + b
@@ -48,6 +59,7 @@ You can create ints and floats by using int and float like this:
 ```
 
 Dividing an int by an int also gives a float — but this is only true by default for Python >= 3 (see [1]):
+int型をint型で割ってもfloat型になります。ただしこれはPython3以降のデフォルト設定での話です。([1]参照):
 
 ```
 >>> 1 / 2
@@ -55,6 +67,7 @@ Dividing an int by an int also gives a float — but this is only true by defaul
 ```
 
 If you only want the integer part of the division, use //
+商の整数部分だけ必要なときは、// を使います
 
 ```
 >>> 1 // 2
@@ -64,6 +77,7 @@ If you only want the integer part of the division, use //
 ```
 
 Python has built-in function called round:
+Pythonには round と呼ばれる組み込み関数があります：（訳注：偶数への丸め。四捨五入ではないです）
 
 ```
 >>> round(5.0 / 2.0)
@@ -71,6 +85,7 @@ Python has built-in function called round:
 ```
 
 The % operator on numbers gives you the remainder of integer division (also known as the modulus):
+% 演算子は、整数の割り算の余りを出力します（modとも言う）：
 
 ```
 >>> 5 % 2
@@ -80,7 +95,9 @@ The % operator on numbers gives you the remainder of integer division (also know
 ```
 
 ##True and False
+## True と False
 True and False are special objects in Python. They are of type bool (for Boolean).
+True と False はPythonでは特別なオブジェクトです。これらは（Booleanを表すための）bool型です
 
 ```
 >>> type(True)
@@ -96,6 +113,7 @@ True
 ```
 
 You can use the logical operators and, or and not to express logic about Boolean values:
+Boolean値を使った論理を表すのに、論理演算子 and, or そして not が使えます：
 
 ```
 >>> True and True
@@ -113,7 +131,9 @@ True
 ```
 
 ## None
+## None
 None is also a special object in Python. By convention, Python often uses None to mean that no valid value resulted from an operation, or to signal that we don’t have a value for a parameter.
+None もPythonでは特別なオブジェクトです。安全のため、操作の結果適切な値が得られなかったことを意味するためや、パラメータの値がないことを知らせるために、Pythonはしばしば None を使います。
 
 ```
 >>> type(None)
@@ -121,13 +141,16 @@ None is also a special object in Python. By convention, Python often uses None t
 ```
 
 Unlike most other values in Python, the default display output from None, is nothing:
+Pythonでは大部分の他の値とは違い、None のデフォルト表示は、何もなしです：
 
 ```
 >>> None
 ```
 
 ## Equals
+## 等号
 As for MATLAB and R, = is for assignment, == is for testing equality.
+MATLABやRと同様に、= は代入に使い、== は等しいことの評価に使います。
 
 ```
 >>> a = 1
@@ -138,6 +161,7 @@ True
 ```
 
 Like R, Python uses != for testing that objects are not equal. This is different from MATLAB, which uses ~=:
+Rと同様に、Python は != をオブジェクト同士が等しくないことの評価に使います。 ~= を使うMATLABとは違います。
 
 ```
 >>> a != 1
@@ -145,7 +169,9 @@ False
 ```
 
 ## “If” statements, blocks and indention
+## “If” 文、ブロック そして インデント
 A conditional statement in Python looks like this:
+Pythonで条件文はこのようになります：
 
 ```
 >>> my_var = 10
@@ -158,6 +184,10 @@ my_var does equal 10
 ```
 
 The first line of the conditional statement, that contains the conditional test, ends in a colon. Call this the if test. There follow some lines indented relative to the if test. Call these indented lines the if block. Python executes the statements in the if block only when the if test evaluates to True. For example, in this case, the if test evaluates to False, and the block does not execute:
+条件文の１行目は、条件の評価を含み、コロンで終わります。これをif式と呼びます。
+if式に対してインデントされた行が続きます。これらのインデントされた行をifブロックと呼びます。
+Pythonはif式が True のときだけifブロック内の文を実行します。
+例えば次の場合、if式が False なので、ブロックは実行されません。
 
 ```
 >>> my_var = 11
@@ -170,12 +200,17 @@ The first line of the conditional statement, that contains the conditional test,
 ```
 
 The first line that returns to the same level of indentation as the if test line, closes the if block.
+if式と同じインデントに戻った最初の行で、ブロックが終わります。
 
 Unless the if block has a further indented block (for example, another if block), then all the lines in the block must have the same indentation.
+ifブロック内に別のインデントされたブロック（例えば別のifブロック）がなければ、ブロック内のすべての行は同じインデントになります。
 
 See note [2] for equivalent if statements in R and MATLAB.
+RとMATLABの同様のif文については注[2]を参照
 
 The if block may be followed by another block where the conditional is else:. This block will only run if the initial conditional test evaluates to False.
+ifブロックに条件文 else: の別のブロックが続く場合があります。
+そのブロックは最初の条件式が False のときだけ実行されます。
 
 ```
 >>> my_var = 11
@@ -191,6 +226,7 @@ my_var does not equal 10
 ```
 
 There may be other conditional tests, with associated conditional blocks. These tests use the contraction elif conditional_test, where elif is a contraction for else if:
+条件ブロックを持つ別の条件式がある場合もあります。そのときは elif 条件式 を使います。elif は else if の略です：
 
 ```
 >>> my_var = 12
