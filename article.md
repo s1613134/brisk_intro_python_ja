@@ -1,5 +1,10 @@
 # Brisk introduction to Python
+# 動的プログラミング言語を知っている人のためのPython入門
+
 This is an introduction designed for those of us who already know a dynamic programming language fairly well. MATLAB and the R language are examples of dynamic programming languages.
+
+このページは、動的プログラミング言語を既に理解している人のためのPython入門です。動的プログラミング言語には、MatlabやRがあげられます。
+
 
 ## How to read this page
 Read this page in one shot from beginning to end. We go through all the basic Python data types, stopping from time to time to talk about relevant features of the Python language.
